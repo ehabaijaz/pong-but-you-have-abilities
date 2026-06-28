@@ -7,6 +7,8 @@
 size = Vector2(17, 112)
 
 [node name="Opponent" type="CharacterBody2D" unique_id=1320547330]
+collision_layer = 4
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_ha0xr")
 

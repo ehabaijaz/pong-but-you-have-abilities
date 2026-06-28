@@ -1,14 +1,31 @@
 [gd_scene format=3 uid="uid://ce43ygn8sm6k5"]
 
+[ext_resource type="Script" uid="uid://b5p2q5o07uuku" path="res://scenes/world.gd" id="1_71j4m"]
 [ext_resource type="Texture2D" uid="uid://b3wjvl40iaoxj" path="res://simple-ping-pong-2Dgame-assets/arts/Board.png" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://ckc22s78svwqe" path="res://scenes/player.tscn" id="2_4wyf3"]
+[ext_resource type="Script" uid="uid://da0wnwptikibm" path="res://scenes/canvas_layer.gd" id="2_i7141"]
 [ext_resource type="PackedScene" uid="uid://dbe8btx1egaf2" path="res://scenes/opponent.tscn" id="3_k0juu"]
+[ext_resource type="FontFile" uid="uid://bg2h0g0ubls7j" path="res://simple-ping-pong-2Dgame-assets/fonts/Teko-VariableFont_wght.ttf" id="3_qfnet"]
 [ext_resource type="PackedScene" uid="uid://clgdp5dbg7ejp" path="res://ball.tscn" id="4_k0juu"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(1170, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
+size = Vector2(1149, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(22, 633)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57qmd"]
+size = Vector2(20, 613)
+
 [node name="World" type="Node2D" unique_id=1235653905]
+script = ExtResource("1_71j4m")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=767782670]
 layer = -1
+script = ExtResource("2_i7141")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1534736269]
 anchors_preset = 15
@@ -20,10 +37,69 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_nnsk1")
 
+[node name="OpponentScore" type="Label" parent="CanvasLayer" unique_id=1621755266]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 144.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_qfnet")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
+[node name="PlayerScore" type="Label" parent="CanvasLayer" unique_id=908842691]
+offset_top = -7.0
+offset_right = 40.0
+offset_bottom = 137.0
+theme_override_fonts/font = ExtResource("3_qfnet")
+theme_override_font_sizes/font_size = 100
+text = "0"
+
 [node name="Player" parent="." unique_id=1916691107 instance=ExtResource("2_4wyf3")]
+position = Vector2(11, 307)
 
 [node name="Opponent" parent="." unique_id=1320547330 instance=ExtResource("3_k0juu")]
-position = Vector2(1158, 102)
+position = Vector2(1141, 312)
 
 [node name="Ball" parent="." unique_id=3468148 instance=ExtResource("4_k0juu")]
 position = Vector2(522, 285)
+
+[node name="Walls" type="Node2D" parent="." unique_id=781207746]
+
+[node name="Wall" type="StaticBody2D" parent="Walls" unique_id=815601243]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall" unique_id=2142195782]
+position = Vector2(570, -6)
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Wall2" type="StaticBody2D" parent="Walls" unique_id=18421828]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2" unique_id=1459816628]
+position = Vector2(579.5, 652.5)
+shape = SubResource("RectangleShape2D_k0juu")
+
+[node name="Areas" type="Node2D" parent="." unique_id=99166026]
+
+[node name="OpponentWin" type="Area2D" parent="Areas" unique_id=264469597]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/OpponentWin" unique_id=1966958982]
+position = Vector2(-28, 339)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="PlayerWin" type="Area2D" parent="Areas" unique_id=167523250]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/PlayerWin" unique_id=1397734725]
+position = Vector2(1188, 325)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[connection signal="body_entered" from="Areas/OpponentWin" to="." method="_on_opponent_win_body_entered"]
+[connection signal="body_entered" from="Areas/PlayerWin" to="." method="_on_player_win_body_entered"]

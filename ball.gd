@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED := 400
+const SPEED := 600
 
 func _ready() -> void:
 	center_pos()
