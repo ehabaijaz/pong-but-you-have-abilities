@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ckc22s78svwqe"]
+
+[ext_resource type="Script" uid="uid://b1y34rm22nbae" path="res://player.gd" id="1_3vyb7"]
+[ext_resource type="Texture2D" uid="uid://2sxcetuexvkc" path="res://simple-ping-pong-2Dgame-assets/arts/Player.png" id="2_g2els"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(18, 118)
+
+[node name="Player" type="CharacterBody2D" unique_id=1916691107]
+motion_mode = 1
+script = ExtResource("1_3vyb7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=879289339]
+texture = ExtResource("2_g2els")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478210621]
+shape = SubResource("RectangleShape2D_g2els")

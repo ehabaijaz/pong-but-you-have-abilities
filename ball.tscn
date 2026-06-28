@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://clgdp5dbg7ejp"]
+
+[ext_resource type="Script" uid="uid://dprquinxg1gnb" path="res://ball.gd" id="1_x8fbi"]
+[ext_resource type="Texture2D" uid="uid://df188so363i0g" path="res://simple-ping-pong-2Dgame-assets/arts/Ball.png" id="2_41u45"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 15.033297
+
+[node name="Ball" type="CharacterBody2D" unique_id=3468148]
+script = ExtResource("1_x8fbi")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1624647122]
+texture = ExtResource("2_41u45")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1487021663]
+shape = SubResource("CircleShape2D_g4v7s")

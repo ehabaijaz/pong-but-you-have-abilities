@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dbe8btx1egaf2"]
+
+[ext_resource type="Script" uid="uid://d1gr3ws402e3s" path="res://opponent.gd" id="1_ha0xr"]
+[ext_resource type="Texture2D" uid="uid://d3j0df60d3gne" path="res://simple-ping-pong-2Dgame-assets/arts/Computer.png" id="2_8l8e6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(17, 112)
+
+[node name="Opponent" type="CharacterBody2D" unique_id=1320547330]
+motion_mode = 1
+script = ExtResource("1_ha0xr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1814523934]
+texture = ExtResource("2_8l8e6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1501344596]
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_g4v7s")
